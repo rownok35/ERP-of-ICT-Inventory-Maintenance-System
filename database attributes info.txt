@@ -1,0 +1,44 @@
+Users:
+is_admin field:
+name:
+picture:
+dept/wing:
+Rank:
+mobile num1:
+mobile num2:
+joining date
+
+
+
+Items:
+Auto Detect:
+UserName
+
+Fields:
+1. SL
+2. Assest IDs
+3. Type (Name and Brand)
+4. Date of Purchase
+# description
+5. Unit Price 
+6. Qty
+# Available quantity
+7. Total Price
+8. Warrenty Duration 
+9. Current Amount
+10. Asset Type (Fixed and consumable)
+11. Remarks textfield
+
+11. Purchased from
+Request for ietms:
+
+
+
+Allocation & approval:
+
+
+dept/wing
+Items
+quantity
+place of Allocation
+date of approval
