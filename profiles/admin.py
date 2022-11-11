@@ -8,7 +8,7 @@ class UserAdminConfig(admin.ModelAdmin):
     
     search_fields = ('email', 'user_name', 'department', 'rank')
     list_filter = ('department', 'rank')
-    list_display = ('user_name','department', 'rank')
+    list_display = ('email', 'user_name','department', 'rank')
     
 
 

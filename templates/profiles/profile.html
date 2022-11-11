@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% block title_block %}
+Profile
+{% endblock %} 
+
+{% block body_block %}
+
+
+<h2>Your Profile</h2>
+
+{% if user.picture %}
+<img src="/media/{{user.picture}}" alt="" class="rounded-circle" height="250 px" width="250px">
+{% else %}
+<img src="/media/profile_pics/user.jpg" height="250 px" width="250px" class="rounded-circle" alt="default-pic">
+{% endif %}
+<br>
+<br>
+
+
+
+<br>
+<p>Username: {{user.user_name}}</p>
+<p>Email: {{user.email}}</p>
+<p>Department: {{user.department}} </p>
+<p>Rank: {{user.rank}} </p>
+<p>Mobile 1: {{user.mobile_1}}</p>
+<p>Mobile 2: {{user.mobile_2}}</p>
+
+<br>
+<a href="{% url 'profiles:user-profile' %}" class="btn btn-warning btn-sm">Change Profile Info</a>
+
+
+{% endblock %} 
