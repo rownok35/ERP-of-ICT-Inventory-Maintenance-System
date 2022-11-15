@@ -27,7 +27,7 @@ def sign_up(request):
 
 @login_required
 def index(request):
-    return render(request, 'base.html', {'name': request.user})
+    return HttpResponseRedirect(reverse('product:items'))
 
 
 def login_page(request):
@@ -40,7 +40,7 @@ def login_page(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect(reverse('profiles:index'))
+                return HttpResponseRedirect(reverse('product:items'))
 
     return render(request, 'profiles/login.html', context={'form': form})
 

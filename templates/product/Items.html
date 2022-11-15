@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} ICT Inventory & Maintenance System {% endblock %}
+{% block body_block %}
+
+{% if user.is_superuser %}
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            {% comment %} <th scope="col">#</th> {% endcomment %}
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Total Purchased</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}    
+                <tr>
+                    {% comment %} <th scope="row">{{ forloop.counter }}</th> {% endcomment %}
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.name}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.product_type}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.brand}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.unit_price}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.total_purchased}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.in_stock}}</a></td>
+                    <td><a style="" href = "{% url 'product:update_item' item.id %}" >Update</a></td>
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+
+{% else %}                 
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            {% comment %} <th scope="col">#</th> {% endcomment %}
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Total Purchased</th>
+            <th scope="col">In Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}    
+                <tr>
+                    {% comment %} <th scope="row">{{ forloop.counter }}</th> {% endcomment %}
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.name}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.product_type}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.brand}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.unit_price}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.total_purchased}}</a></td>
+                    <td><a style="text-decoration: none; color: black;" href = "{% url 'product:details' item.id %}" >{{item.in_stock}}</a></td>
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+<p>Showing {{showing_items}} out of {{total_items}} Items</P>
+
+    {% if items.has_other_pages %}
+
+        <div class="pagination">
+            
+
+                {% if items.has_previous %}
+                <li><a href="?page={{items.previous_page_number}}" class="btn page-link"
+                        data-page="{{items.previous_page_number}}">&#10094; Prev</a></li>
+                {% endif %}
+
+
+                {% for page in custom_range %}
+
+                {% if page == items.number%}
+                <li><a href="?page={{page}}" class="btn page-link btn--sub" data-page="{{page}}">{{page}}</a></li>
+                {% else %}
+                <li><a href="?page={{page}}" class="btn page-link" data-page="{{page}}">{{page}}</a></li>
+                {% endif %}
+
+                {% endfor %}
+
+                {% if items.has_next %}
+                <li><a href="?page={{items.next_page_number}}" class="btn page-link"
+                        data-page="{{items.next_page_number}}">Next &#10095;</a></li>
+                {% endif %}
+
+
+
+            
+        </div>
+      {% endif %}
+
+{% endblock %}

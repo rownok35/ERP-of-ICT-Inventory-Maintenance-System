@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} ICT Inventory & Maintenance System {% endblock %}
+{% block body_block %}
+
+<div class="table-responsive">
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <th>Item Name: </th>
+                <td>{{item.name}}</td>
+            </tr>
+
+            <tr>
+                <th>Type: </th>
+                <td>{{item.product_type}}</td>
+            </tr>
+
+            <tr>
+                <th>Brand: </th>
+                <td>{{item.brand}}</td>
+            </tr>
+
+            <tr>
+                <th>Description: </th>
+                <td>{{item.description|linebreaks}}</td>
+            </tr>
+
+            <tr>
+                <th>Date of purchase: </th>
+                <td>{{item.date_of_purchase}}</td>
+            </tr>
+
+            <tr>
+                <th>Unit Price: </th>
+                <td>{{item.unit_price}}</td>
+            </tr>
+
+            <tr>
+                <th>total_purchased: </th>
+                <td>{{item.total_purchased}}</td>
+            </tr>
+
+            <tr>
+                <th>In Stock: </th>
+                <td>{{item.in_stock}}</td>
+            </tr>
+
+            
+            <tr>
+                <th>Total Price: </th>
+                <td>{{item.total_price}}</td>
+            </tr>
+
+            
+            <tr>
+                <th>Warrenty Period: </th>
+                {% if item.warrenty > 1 %}
+                <td>{{item.warrenty}} Years</td>
+                {% else %}
+                <td>{{item.warrenty}} Year</td>
+                {% endif %}
+            </tr>
+
+            
+            <tr>
+                <th>Uploaded By: </th>
+                <td>{{item.user}}</td>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}
