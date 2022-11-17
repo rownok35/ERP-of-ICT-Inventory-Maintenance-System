@@ -45,7 +45,7 @@
           
 
         </ul>
-        <form class="d-flex">
+        <form id='searchForm' class="d-flex" role="search" method="get" action="{% url 'product:items' %}">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>

@@ -90,8 +90,7 @@ def update_item(request, id):
         if form.is_valid():
             form = form.save(commit=False)
             if form.date_of_purchase == None:
-                form.date_of_purchase = date_of_purchase
-                
+                form.date_of_purchase = date_of_purchase                
             form.save()
             messages.success(request, "Change Saved!!")
             form = ItemForm(instance=item)
