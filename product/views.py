@@ -6,15 +6,27 @@ from product.forms import ItemForm
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.db.models import Q
 # Create your views here.
 
 @login_required
 def Item_all(request):
 
-    items = Item.objects.all()
+    search_query = ''
+
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+    
+    # print("search_query: ",search_query)
+    # items = Item.objects.filter()
+    
+    if search_query == '':
+        items = Item.objects.filter()
+    else:
+        items = Item.objects.filter(Q(name__icontains = search_query) | Q(product_type__icontains = search_query) | Q(brand__icontains = search_query) | Q(budget_code__icontains = search_query))
 
     #Pagination
-    showing_product = 5
+    showing_product = 50
     paginator = Paginator(items, showing_product)
     page = request.GET.get('page')
 
@@ -70,10 +82,16 @@ def add_item(request):
 @login_required
 def update_item(request, id):
     item = Item.objects.get(pk=id)
+    date_of_purchase = item.date_of_purchase
     form = ItemForm(instance=item)
     if request.method == 'POST':
         form = ItemForm(request.POST, instance= item)
+
         if form.is_valid():
+            form = form.save(commit=False)
+            if form.date_of_purchase == None:
+                form.date_of_purchase = date_of_purchase
+                
             form.save()
             messages.success(request, "Change Saved!!")
             form = ItemForm(instance=item)
