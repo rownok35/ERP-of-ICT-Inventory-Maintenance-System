@@ -25,3 +25,25 @@ class Item(models.Model):
 
     class Meta:
         ordering = ['-created',]
+
+
+
+class Request(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    requested_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    requested_for = models.CharField(max_length=256, blank=True, null=True)
+    amount = models.IntegerField()
+    Request_Created = models.DateField(auto_now_add=True)
+
+    accepted = models.BooleanField(default=False)
+    accepted_by = models.CharField(max_length=256, blank=True, null=True)
+    accepted_at = models.DateTimeField(blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return (f"{self.item} , requestd for {self.requested_for}, amount {self.amount}")
+
+    class Meta:
+        ordering = ['-Request_Created',]
+
+

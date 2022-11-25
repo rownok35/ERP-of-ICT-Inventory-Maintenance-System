@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from product.models import Item
+from product.models import Item, Request
 from django import forms
 
 class ItemForm(ModelForm):
@@ -8,3 +8,8 @@ class ItemForm(ModelForm):
         exclude = ('user', 'created', 'updated')
         widgets = {
         'date_of_purchase': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),}
+
+class RequestForm(ModelForm):
+    class Meta:
+        model = Request
+        exclude = ('item', 'requested_by', 'Request_Created', 'accepted', 'accepted_by', 'accepted_at')

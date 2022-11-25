@@ -12,6 +12,24 @@
                 <td>{{item.name}}</td>
             </tr>
 
+            {% if user.is_superuser %}
+
+            <tr>
+                <th>Allocate Item: </th>
+                <td><a style="" href = "{% url 'product:request_item' item.id %}" >Link</a></td>
+            </tr>
+
+            {% else %}
+
+            <tr>
+                <th>Request for Allocation: </th>
+                <td><a style="" href = "{% url 'product:request_item' item.id %}" >Link</a></td>
+            </tr>
+
+            {% endif %}
+
+            
+
             <tr>
                 <th>Type: </th>
                 <td>{{item.product_type}}</td>

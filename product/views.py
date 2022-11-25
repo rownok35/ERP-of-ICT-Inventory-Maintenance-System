@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from product.models import Item
+from product.models import Item, Request
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from product.forms import ItemForm
+from product.forms import ItemForm, RequestForm
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
@@ -77,6 +77,32 @@ def add_item(request):
             form.save()
             return HttpResponseRedirect(reverse('product:items'))
     return render(request, 'product/add_item.html', context={'form': form})
+
+
+@login_required
+def request_item(request, id):
+    item = Item.objects.get(pk=id)
+    in_stock = item.in_stock
+    form = RequestForm()
+
+    if request.method == 'POST':
+        form = RequestForm(request.POST)
+        if form.is_valid():
+            
+            form = form.save(commit=False)
+
+            if form.amount > in_stock:
+                
+                messages.warning(request, "Item Amount must be less than In Stock")
+                return HttpResponseRedirect(reverse('product:request_item', args=(id,)))
+            form.item = item
+            form.requested_by = request.user
+            form.save()
+            messages.success(request, "Request Added!!")
+            return HttpResponseRedirect(reverse('product:items'))
+    
+    return render(request, 'product/request_item.html', context={'form': form, 'item': item})
+
 
 
 @login_required

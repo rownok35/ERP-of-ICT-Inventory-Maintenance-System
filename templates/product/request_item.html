@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Request Item {% endblock %}
+{% block body_block %}
+<h2>Item Information</h2>
+
+<div class="table-responsive">
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <th>Item Name: </th>
+                <td>{{item.name}}</td>
+            </tr>
+
+            <tr>
+                <th>Type: </th>
+                <td>{{item.product_type}}</td>
+            </tr>
+
+            <tr>
+                <th>Brand: </th>
+                <td>{{item.brand}}</td>
+            </tr>
+
+            <tr>
+                <th>Budget Code: </th>
+                <td>{{item.budget_code}}</td>
+            </tr>
+
+            <tr>
+                <th>In Stock: </th>
+                <td>{{item.in_stock}}</td>
+            </tr>
+
+       
+        </tbody>
+    </table>
+</div>
+
+<form method="POST">
+{{ form|crispy }}
+{% csrf_token %}
+<button type="submit" class="btn btn-success btn-md">Request</button>
+</form>
+<br>
+
+{% endblock %}
