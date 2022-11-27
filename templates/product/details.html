@@ -100,7 +100,37 @@
         </tbody>
     </table>
 </div>
+<hr>
+{% if granted_items %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            
+            <th scope="col">Allocate At</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Approved By</th>
 
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in granted_items %}    
+                <tr>
+                   
+                    <td>{{item.requested_for}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.accepted_at}}</td>
+                    <td>{{item.accepted_by}}</td>
+                    
+                    
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endif %}
 
 
 {% endblock %}

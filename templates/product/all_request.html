@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Requests {% endblock %}
+{% block body_block %}
+
+
+  
+
+
+{% if user.is_superuser %}
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th scope="col">Item Name</th>
+            <th scope="col">Requested For</th>
+            <th scope="col">Amount</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Decision</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}    
+                <tr>
+     
+                    <td><a href = "{% url 'product:details' req.item.id %}" >{{req.item}}</a></td>
+                    <td>{{req.requested_for}}</td>
+                    <td>{{req.amount}}</td>
+                    <td>{{req.item.in_stock}}</td>
+                    <td>
+                        {% if not req.accepted and not req.rejected %}
+                            <span> 
+
+                                <a href="{% url 'product:accepted_item' req.id %}" type="button" class="btn btn-success" >
+                                    Accept
+                                </a>
+                                                                   
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                    Reject 
+                                </button> 
+
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are You sure to reject?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a href="" type="button" class="btn btn-danger">Reject</a>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </span>
+
+                        {% elif req.accepted %}
+                            <button type="button" class="btn btn-success">Accepted</button>
+                        {% elif req.rejected %}
+                            <button type="button" class="btn btn-danger">Rejected</button> 
+                        {% endif %}
+                    </td>
+                    
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+
+
+{% else %}                 
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Requested For</th>
+            <th scope="col">Amount</th>
+            <th scope="col">In Stock</th>
+            <th scope="col">Decision</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for req in requests %}    
+                <tr>
+                    <td><a href = "{% url 'product:details' req.item.id %}" >{{req.item}}</a></td>
+                    <td>{{req.requested_for}}</td>
+                    <td>{{req.amount}}</td>
+                    <td>{{req.item.in_stock}}</td>
+                    {% if not req.accepted and not req.rejected %}
+                    <td><button type="button" class="btn btn-info">Pending</button></td>
+                    {% elif req.accepted %}
+                    <td><button type="button" class="btn btn-success">Accepted</button></td>
+                    {% elif req.rejected %}
+                    <td><button type="button" class="btn btn-danger">Rejected</button></td>
+                    {% endif %}
+                    
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+
+{% endblock %}

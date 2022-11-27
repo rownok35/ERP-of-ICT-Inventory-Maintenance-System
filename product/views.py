@@ -7,6 +7,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
+import datetime
 # Create your views here.
 
 @login_required
@@ -62,7 +63,9 @@ def Item_all(request):
 def details(request, id):    
 
     item = Item.objects.get(id = id)
-    context = {'item': item}
+    granted_items = Request.objects.filter(Q(item__id = item.id) & Q(accepted = True))
+    print('granted_items', granted_items)
+    context = {'item': item, 'granted_items':granted_items}
     return render(request, 'product/details.html', context)
 
 
@@ -77,6 +80,28 @@ def add_item(request):
             form.save()
             return HttpResponseRedirect(reverse('product:items'))
     return render(request, 'product/add_item.html', context={'form': form})
+
+@login_required
+def all_request(request):
+    requests = Request.objects.all()
+    return render(request, 'product/all_request.html', context={'requests': requests})
+
+@login_required
+def accepted_item(request, id):
+    request_item = Request.objects.get(id=id)
+    request_item.accepted = True
+    a = str(request.user)
+
+    request_item.accepted_by = a
+    request_item.accepted_at = datetime.datetime.now()
+    request_item.save()
+
+    item = Item.objects.get(id = request_item.item.id)
+    item.in_stock -= request_item.amount 
+    item.save()
+
+
+    return HttpResponseRedirect(reverse('product:all_request'))
 
 
 @login_required

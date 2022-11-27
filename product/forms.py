@@ -12,4 +12,4 @@ class ItemForm(ModelForm):
 class RequestForm(ModelForm):
     class Meta:
         model = Request
-        exclude = ('item', 'requested_by', 'Request_Created', 'accepted', 'accepted_by', 'accepted_at')
+        exclude = ('item', 'requested_by', 'request_created', 'accepted', 'accepted_by', 'accepted_at', 'rejected', 'remarks','rejected_by', 'rejected_at')

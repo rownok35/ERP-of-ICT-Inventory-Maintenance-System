@@ -12,7 +12,7 @@ Profile
 {% if user.picture %}
 <img src="/media/{{user.picture}}" alt="" class="rounded-circle" height="250 px" width="250px">
 {% else %}
-<img src="/media/profile_pics/user.jpg" height="250 px" width="250px" class="rounded-circle" alt="Insert Profile Pic">
+<a href="{% url 'profiles:user-profile' %}">Insert Your Pic</a>
 {% endif %}
 <br>
 <br>

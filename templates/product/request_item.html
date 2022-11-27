@@ -41,7 +41,11 @@
 <form method="POST">
 {{ form|crispy }}
 {% csrf_token %}
+{% if user.is_superuser %}
+<button type="submit" class="btn btn-success btn-md">Grant</button>
+{% else %}
 <button type="submit" class="btn btn-success btn-md">Request</button>
+{% endif %}
 </form>
 <br>
 
