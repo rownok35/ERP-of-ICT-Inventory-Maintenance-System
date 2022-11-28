@@ -38,7 +38,7 @@ class Request(models.Model):
     requested_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     requested_for = models.CharField(max_length=256)
     amount = models.IntegerField()
-    request_created = models.DateField(default=datetime.datetime.now)
+    request_created = models.DateTimeField(default=datetime.datetime.now)
 
     accepted = models.BooleanField(default=False)
     accepted_by = models.CharField(max_length=256, blank=True, null=True)

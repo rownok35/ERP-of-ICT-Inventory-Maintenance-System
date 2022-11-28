@@ -87,6 +87,19 @@ def all_request(request):
     return render(request, 'product/all_request.html', context={'requests': requests})
 
 @login_required
+def rejected_item(request, id):
+    request_item = Request.objects.get(id=id)
+    request_item.rejected = True
+    a = str(request.user)
+
+    request_item.rejected_by = a
+    request_item.rejected_at = datetime.datetime.now()
+    request_item.save()
+
+
+    return HttpResponseRedirect(reverse('product:all_request'))
+
+@login_required
 def accepted_item(request, id):
     request_item = Request.objects.get(id=id)
     request_item.accepted = True
@@ -101,7 +114,7 @@ def accepted_item(request, id):
     item.save()
 
 
-    return HttpResponseRedirect(reverse('product:all_request'))
+    return HttpResponseRedirect(reverse('product:details', args=(request_item.item.id,)))
 
 
 @login_required
@@ -118,7 +131,7 @@ def request_item(request, id):
 
             if form.amount > in_stock:
                 
-                messages.warning(request, "Item Amount must be less than In Stock")
+                messages.warning(request, "Item Amount must be less than or equal In Stock")
                 return HttpResponseRedirect(reverse('product:request_item', args=(id,)))
             form.item = item
             form.requested_by = request.user

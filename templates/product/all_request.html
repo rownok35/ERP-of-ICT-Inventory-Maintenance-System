@@ -16,6 +16,7 @@
         <tr>
 
             <th scope="col">Item Name</th>
+            <th scope="col">Requested At</th>
             <th scope="col">Requested For</th>
             <th scope="col">Amount</th>
             <th scope="col">In Stock</th>
@@ -28,6 +29,7 @@
                 <tr>
      
                     <td><a href = "{% url 'product:details' req.item.id %}" >{{req.item}}</a></td>
+                    <td>{{req.request_created}}</td>
                     <td>{{req.requested_for}}</td>
                     <td>{{req.amount}}</td>
                     <td>{{req.item.in_stock}}</td>
@@ -39,27 +41,10 @@
                                     Accept
                                 </a>
                                                                    
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <a href="{% url 'product:rejected_item' req.id %}" type="button" class="btn btn-danger" >
                                     Reject 
-                                </button> 
+                                </a> 
 
-                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Info</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are You sure to reject?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a href="" type="button" class="btn btn-danger">Reject</a>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
                             </span>
 
                         {% elif req.accepted %}
@@ -85,6 +70,7 @@
         <thead>
         <tr>
             <th scope="col">Item Name</th>
+            <th scope="col">Requested At</th>
             <th scope="col">Requested For</th>
             <th scope="col">Amount</th>
             <th scope="col">In Stock</th>
@@ -95,6 +81,7 @@
             {% for req in requests %}    
                 <tr>
                     <td><a href = "{% url 'product:details' req.item.id %}" >{{req.item}}</a></td>
+                    <td>{{req.request_created}}</td>
                     <td>{{req.requested_for}}</td>
                     <td>{{req.amount}}</td>
                     <td>{{req.item.in_stock}}</td>
