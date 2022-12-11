@@ -6,36 +6,80 @@ Login
 {% block css_block %}
 <style>
 
-    
-    .log_in {
-        margin-left: 10% ;
-        margin-right: 10% ;
-        border: 1px solid #ccc;
-        padding: 20px;
+    body{
+        background-color: rgb(229, 226, 226);
+    }
+    .row{
+        background-color: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+    img{
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
         
+    }
+    .btn1{
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: rgb(62, 65, 62);
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover{
+        border: 1px solid;
+        background-color: white;
+        color: rgb(62, 65, 62);
     }
 </style>
 {% endblock %} 
 {% block body_block %}
 
-<br>
-<br>
-<center>
 
-    <div class="log_in">
 
-        <h2>Login</h2>
-        <form method="POST">
-            <br>
-            {{ form| crispy}} {% csrf_token %}
-            <br>
-            <button type="submit" class="btn btn-primary btn-md">Login</button>
-        </form>
+<section class="Form my-5 mx-5">
+    <div class="container">
+        <div class="row g-0" >
+            <div class="col-lg-5">
+                <img src="/media/ict3.jpg"  class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-7">
+                
+                <h1 class="pt-5 pb-2"><b style="color: rgb(62, 65, 62);">MIST ICT DIRECTORATE</b></h1>
+                <h5 style="color: rgb(76, 81, 76);">Sign in into your account</h5>
 
+                <form action="{% url 'profiles:login' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input name = "email" type="email" placeholder="Email-Address" class="form-control my-3 p-2">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input name="password" type="password" placeholder="Password" class="form-control my-3 p-2">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <button type="submit" class="btn1 mt-3 mb-5">Login</button>
+                        </div>
+                    </div>
+                    
+                    
+                </form>
+            </div>
+        </div>
     </div>
-  
 
-</center>
+</section>
+
+
 
 
 {% endblock %}

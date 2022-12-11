@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} Report {% endblock %}
+{% block body_block %}
+
+<center><h3>Report</h3></center>
+<hr>
+{% if not reports %}
+<p>No Item Allotated<p>
+{%else%}
+<div class="table-responsive">
+    
+    
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Approved For</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Approved At</th>
+            <th scope="col">Approved By</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in reports %}    
+                <tr>
+                    <td><a style="text-decoration:none" href = "{% url 'product:details' item.item.id %}">{{item.item}}</a></td>
+                    {% if item.other %}
+                    <td>{{item.requested_for}}-{{item.other}}</td>
+                    {% else %}
+                    <td>{{item.requested_for}}</td>
+                    {% endif %}
+                    <td>{{item.amount}}</td>
+                    <td>{{item.accepted_at}}</td>
+                    <td>{{item.accepted_by}}</td>
+                    
+                    
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+
+{% endblock %}

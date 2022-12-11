@@ -42,3 +42,34 @@ Items
 quantity
 place of Allocation
 date of approval
+
+Requests
+ |
+\ /
+lists of Requests
+status : accepted or rejected pending
+
+
+
+.....
+Department wise report 
+
+UPdate
+1. Invoice Number
+2. SkU Num Integer field (Item Code)
+3. Voucher Number
+4. Product Type Admin Inpit (will be dynamically shown in the add Item)
+5. Buy from
+(IN Stock Hidden)
+Budget Code
+Budget Title
+
+form 
+quantity(instead of amount)
+
+same Item might be bought from different supplier, price
+
+
+Name (Auto Suggestion Incremental Search)
+product Type = Dropdown
+Brand and product type related

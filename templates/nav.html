@@ -34,6 +34,20 @@
             </ul>
             
           </li>
+    
+
+          <li id="navbar-example" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Reports
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown"  style="max-height: 21em; overflow-y: scroll;">
+              {% for wing in wings %}
+              <li><a class="dropdown-item" href="{% url 'product:report_wing' wing %}">{{wing}}</a></li>
+              {% endfor %}
+            </ul>
+            
+          </li>
+      
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profiles:logout' %}">Logout</a>
@@ -47,10 +61,12 @@
           
 
         </ul>
+        {% if user.is_authenticated %}
         <form id='searchForm' class="d-flex" role="search" method="get" action="{% url 'product:items' %}">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search_query">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        {% endif %}
       </div>
     </div>
   </nav>

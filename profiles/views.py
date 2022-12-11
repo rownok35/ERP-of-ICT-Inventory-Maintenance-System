@@ -31,18 +31,16 @@ def index(request):
 
 
 def login_page(request):
-    form = AuthenticationForm()
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect(reverse('product:items'))
 
-    return render(request, 'profiles/login.html', context={'form': form})
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('product:items'))
+
+    return render(request, 'profiles/login.html', {})
 
 @login_required
 def logout_user(request):
