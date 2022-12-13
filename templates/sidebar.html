@@ -1,0 +1,123 @@
+<header class="header">
+    <div class="header__container" >
+        <a href="{% url 'product:items' %}" class="header__logo">MIST ICT Dte</a>
+
+        {% if user.is_authenticated %}
+
+        {% comment %} {% if user.picture %}
+        <img src="/media/{{user.picture}}" alt="" class="header__img">
+        {% endif %} {% endcomment %}
+
+        
+
+        
+        <form class="header__search" id='searchForm' role="search" method="get" action="{% url 'product:items' %}">
+            <input type="search" placeholder="Search" class="header__input" name="search_query">
+            <i class='bx bx-search header__icon'></i>
+        </form>
+
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+        {% endif %}
+    </div>
+</header>
+
+<div class="nav" id="navbar">
+    <nav class="nav__container">
+        <div>
+            <a href="{% url 'product:items' %}" class="nav__link nav__logo">
+                <i class='bx bxs-disc nav__icon' ></i>
+                <span class="nav__logo-name">ICT</span>
+            </a>
+            {% if user.is_authenticated %}
+
+            <div class="nav__list">
+                <div class="nav__items">
+                    {% comment %} <h3 class="nav__subtitle">Profile</h3> {% endcomment %}
+
+                    <a href="{% url 'product:items' %}" class="nav__link ">
+                        <i class="fa-solid fa-house-laptop nav__icon"></i>
+                        {% comment %} <i class="fa-sharp fa-solid fa-house-chimney nav__icon"></i> {% endcomment %}
+                        <span class="nav__name">Home</span>
+                    </a>
+
+                    
+
+                    
+                    
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class="fa-solid fa-user nav__icon"></i>
+                            <span class="nav__name">User</span>
+                            <i class="fa-sharp fa-solid fa-caret-down nav__icon nav__dropdown-icon"></i>
+                        </a>
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                {% if user.is_superuser %}
+                                <a href="{% url 'profiles:create-user' %}" class="nav__dropdown-item">Create User</a>
+                                {% endif %}
+                                <a href="{% url 'profiles:profile' %}" class="nav__dropdown-item">Profile</a>
+                                <a href="{% url 'profiles:pass_change' %}" class="nav__dropdown-item">Cng Password</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class="fa-sharp fa-solid fa-computer nav__icon"></i>
+                            <span class="nav__name">Items</span>
+                            <i class="fa-sharp fa-solid fa-caret-down nav__icon nav__dropdown-icon"></i>
+                        </a>
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="#" class="nav__dropdown-item">Add Category</a>
+                                <a href="{% url 'product:add_items' %}" class="nav__dropdown-item">Add Item</a>
+                                <a href="{% url 'product:all_request' %}" class="nav__dropdown-item">Requests</a>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class="fa-solid fa-chart-pie nav__icon"></i>
+                            <span class="nav__name">Report</span>
+                            <i class="fa-sharp fa-solid fa-caret-down nav__icon nav__dropdown-icon"></i>
+                        </a>
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                
+                                {% for wing in wings %}
+                                    <a class="nav__dropdown-item" href="{% url 'product:report_wing' wing %}">{{wing}}</a>
+                                {% endfor %}
+                                
+                            </div>
+                        </div>
+
+                    </div>
+
+                  
+                    
+
+
+
+                </div>
+
+                
+            </div>
+        </div>
+
+        <a href="{% url 'profiles:logout' %}" class="nav__link nav__logout">
+            <i class='bx bx-log-out nav__icon' ></i>
+            <span class="nav__name">Log Out</span>
+        </a>
+
+        {% endif %}
+    </nav>
+</div>
