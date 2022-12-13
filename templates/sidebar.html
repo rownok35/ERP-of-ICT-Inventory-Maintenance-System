@@ -16,8 +16,8 @@
             <i class='bx bx-search header__icon'></i>
         </form>
 
-        <div class="header__toggle">
-            <i class='bx bx-menu' id="header-toggle"></i>
+        <div class="header__toggle"> 
+            <i class='fa-solid fa-bars' id="header-toggle"></i>
         </div>
         {% endif %}
     </div>
@@ -26,10 +26,11 @@
 <div class="nav" id="navbar">
     <nav class="nav__container">
         <div>
-            <a href="{% url 'product:items' %}" class="nav__link nav__logo">
-                <i class='bx bxs-disc nav__icon' ></i>
-                <span class="nav__logo-name">ICT</span>
-            </a>
+           
+                <a href="{% url 'product:items' %}" class="nav__link nav__logo">
+                    <img src="/media/MIST_Logo.png" style="hight:100px; width:100px; margin-left: auto; margin-right: auto;display:block;">
+                </a>
+           
             {% if user.is_authenticated %}
 
             <div class="nav__list">
