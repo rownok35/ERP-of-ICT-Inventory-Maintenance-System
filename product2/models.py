@@ -47,9 +47,13 @@ class Item2(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
 
+    def total_price(self):
+        return self.unit_price*self.total_purchased
+
+
 
     def __str__(self):
-        return self.name
+        return self.model_name
 
     class Meta:
         ordering = ['-created',]

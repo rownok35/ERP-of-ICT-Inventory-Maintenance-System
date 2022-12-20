@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_block %} ICT Inventory & Maintenance System {% endblock %}
+{% block body_block %}
+
+<div class="table-responsive">
+    <table class="table table-hover">
+
+        <tbody>
+            <tr>
+                <th>Item Name: </th>
+                <td>{{item.model_name}}</td>
+            </tr>
+
+            {% if user.is_superuser %}
+
+            {% comment %} <p>
+                {% url 'product:grant_item' item.id %}
+                {% url 'product:request_item' item.id %}
+            </p> {% endcomment %}
+
+            <tr>
+                <th>Allocate Item: </th>
+                <td><a style="" href = "#" >Link</a></td>
+            </tr>
+
+            {% else %}
+
+            <tr>
+                <th>Request for Allocation: </th>
+                <td><a style="" href = "#" >Link</a></td>
+            </tr>
+
+            {% endif %}
+
+            
+
+            <tr>
+                <th>Type: </th>
+                <td>{{item.product}}</td>
+            </tr>
+
+            <tr>
+                <th>Brand: </th>
+                <td>{{item.brand}}</td>
+            </tr>
+
+            <tr>
+                <th>Additional Information: </th>
+                <td>{{item.additional_info|linebreaks}}</td>
+            </tr>
+
+            <tr>
+                <th>Item Code: </th>
+                <td>{{item.item_code}}</td>
+            </tr>
+
+            <tr>
+                <th>Invoice Number: </th>
+                <td>{{item.invoice_number}}</td>
+            </tr>
+
+            <tr>
+                <th>Voucher Number: </th>
+                <td>{{item.voucher_number}}</td>
+            </tr>
+
+            <tr>
+                <th>Seller: </th>
+                <td>{{item.seller_info}}</td>
+            </tr>
+
+            <tr>
+                <th>Date of purchase: </th>
+                <td>{{item.date_of_purchase}}</td>
+            </tr>
+
+
+            <tr>
+                <th>Unit Price: </th>
+                <td>{{item.unit_price}}</td>
+            </tr>
+
+            <tr>
+                <th>total_purchased: </th>
+                <td>{{item.total_purchased}}</td>
+            </tr>
+
+            <tr>
+                <th>In Stock: </th>
+                <td>{{item.in_stock}}</td>
+            </tr>
+
+            
+            <tr>
+                <th>Total Price: </th>
+                <td>{{item.total_price}}</td>
+            </tr>
+
+            
+            <tr>
+                <th>Warrenty Period: </th>
+                {% if item.warrenty > 1 %}
+                <td>{{item.warrenty}} Years</td>
+                {% else %}
+                <td>{{item.warrenty}} Year</td>
+                {% endif %}
+            </tr>
+
+            <tr>
+                <th>Budget Code: </th>
+                <td>{{item.budget_code}}</td>
+            </tr>
+
+            <tr>
+                <th>Budget Title: </th>
+                <td>{{item.budget_title}}</td>
+            </tr>
+
+            <tr>
+                <th>Financial Year: </th>
+                <td>{{item.financial_year}}</td>
+            </tr>
+
+            
+            <tr>
+                <th>Uploaded By: </th>
+                <td>{{item.user}}</td>
+            </tr>
+        
+        </tbody>
+    </table>
+</div>
+<hr>
+<center><h3>Distributions</h3></center>
+<hr>
+{% if granted_items %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            
+            <th scope="col">Allocated At</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Approved At</th>
+            <th scope="col">Approved By</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in granted_items %}    
+                <tr>
+                    {% if item.other %}
+                    <td>{{item.requested_for}}-{{item.other}}</td>
+                    {% else %}
+                    <td>{{item.requested_for}}</td>
+                    {% endif %}
+                    <td>{{item.amount}}</td>
+                    <td>{{item.accepted_at}}</td>
+                    <td>{{item.accepted_by}}</td>
+                    
+                    
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+
+{% endblock %}

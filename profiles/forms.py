@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = NewUser
-        fields = ('email', 'picture', 'user_name', 'department', 'rank', 'mobile_1', 'mobile_2', 'password' )
+        fields = ('email', 'picture', 'user_name', 'department', 'rank', 'mobile_1', 'mobile_2' )
     
     def clean(self):
         pass

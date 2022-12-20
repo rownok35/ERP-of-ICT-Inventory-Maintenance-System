@@ -11,7 +11,7 @@
         
 
         
-        <form class="header__search" id='searchForm' role="search" method="get" action="{% url 'product:items' %}">
+        <form class="header__search" id='searchForm' role="search" method="get" action="{% url 'product2:Item_all' %}">
             <input type="search" placeholder="Search" class="header__input" name="search_query">
             <i class='bx bx-search header__icon'></i>
         </form>
@@ -38,11 +38,22 @@
                 <div class="nav__items">
                     {% comment %} <h3 class="nav__subtitle">Profile</h3> {% endcomment %}
 
-                    <a href="{% url 'product:items' %}" class="nav__link ">
-                        <i class="fa-solid fa-house-laptop nav__icon"></i>
-                        {% comment %} <i class="fa-sharp fa-solid fa-house-chimney nav__icon"></i> {% endcomment %}
-                        <span class="nav__name">Home</span>
-                    </a>
+               
+
+                    <div class="nav__dropdown">
+                        <a href="{% url 'product:items' %}" class="nav__link">
+                            <i class="fa-solid fa-house-laptop nav__icon"></i>
+                            <span class="nav__name">Home</span>
+                            <i class="fa-sharp fa-solid fa-caret-down nav__icon nav__dropdown-icon"></i>
+                        </a>
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="#" class="nav__dropdown-item">By Category</a>
+                                <a href="{% url 'product2:Item_all' %}" class="nav__dropdown-item">By Product</a>
+                            </div>
+                        </div>
+                    </div>
 
                     
 
@@ -76,7 +87,7 @@
                         <div class="nav__dropdown-collapse">
                             <div class="nav__dropdown-content">
                                 <a href="{% url 'product2:item_category' %}" class="nav__dropdown-item">Add Category</a>
-                                <a href="{% url 'product:add_items' %}" class="nav__dropdown-item">Add Item</a>
+                                <a href="{% url 'product2:item_add' %}" class="nav__dropdown-item">Add Item</a>
                                 <a href="{% url 'product:all_request' %}" class="nav__dropdown-item">Requests</a>
                                 
                             </div>
